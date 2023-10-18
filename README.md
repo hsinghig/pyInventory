@@ -7,3 +7,7 @@ py -m venv env
  
 (env) PS C:\projects\github\pyInventory> set FLASK_APP=app.py
 (env) PS C:\projects\github\pyInventory> set FLASK_ENV=development
+
+
+(env) PS C:\projects\github\pyInventory> $Env:FLASK_APP="startup:app"
+(env) PS C:\projects\github\pyInventory> $Env:FLASK_ENV="development"
