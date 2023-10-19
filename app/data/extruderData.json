@@ -1,0 +1,26 @@
+[
+    {
+        "location": "EXT A", 
+        "rollNumber": "100",
+        "color": "BLACK", 
+        "width": 93,
+        "length": 3515,
+        "weight": 500
+    }, 
+     {
+        "location": "EXT A", 
+        "rollNumber": "101",
+        "color": "GREEN", 
+        "width": 93,
+        "length": 3515,
+        "weight": 500
+    },
+     {
+        "location": "EXT A", 
+        "rollNumber": "102",
+        "color": "RED", 
+        "width": 93,
+        "length": 3515,
+        "weight": 500
+    }
+]
