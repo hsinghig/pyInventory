@@ -1,0 +1,14 @@
+{% extends 'dashboard_base.html' %}
+{% set active_page='dashboard' %}
+
+{% block extruderContent %}
+{% with data=extruderDF %}
+{% include "inventoryData.html" %}
+{% endwith %}
+{% endblock %}
+
+{% block crossplyContent %}
+{% with data=crossPlyDF %}
+{% include "inventoryData.html" %}
+{% endwith %}
+{% endblock %}

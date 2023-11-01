@@ -1,0 +1,22 @@
+/* prevent font adjustments in ios and IE on windows on orientation change*/
+html {-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+
+* {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+body{
+    font-family: $defaultFont;
+    font-size: $size-default;
+    padding-top: $padding-top;
+}
+
+.navbar-brand{
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+/* Clearfix: Force an element not to collapse */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear:both;
+}

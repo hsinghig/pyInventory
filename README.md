@@ -20,3 +20,11 @@ py -m venv env
 
 (env) PS C:\projects\github\pyInventory> $Env:FLASK_APP="startup:app"
 (env) PS C:\projects\github\pyInventory> $Env:FLASK_ENV="development"
+
+## future libraries
+1. Pendulum - for datetime
+2. pypdf - read / merge /split pdf documents
+3. icecream - debugging easier
+4. loguru - logging 
+5. Xarray - multi dimensional data
+
