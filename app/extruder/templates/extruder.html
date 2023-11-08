@@ -5,63 +5,47 @@ Extruder
 {%endblock%}
 {% block pageContent %}
 <h1 class="primary">I am extruder page</h1>
-<div class="row">
-    <div class="col-lg-7 offset-lg-2 my-5">
-        <div class="card effect1">
-            <h1>Add New Extruder Roll</h1>
-            <hr />
-            <form method="POST" autocomplete="off">
-                <div class="form-group">
-                    <label for="location" class="form-label">Location</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="location" value="Ext A"> Ext A
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="location" value="Ext B"> Ext B
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="rollNumber" class="form-label">Roll #</label>
-                    <input type="text" class="form-control" name="rollNumber" />
-                </div>
-                <div class="form-group">
-                    <select name="color" class="form-control form-select" aria-label="Choose Color">
-                        <option selected>Choose Color</option>
-                        <option value="BLACK">BLACK</option>
-                        <option value="BLUE">BLUE</option>
-                        <option value="GREEN">GREEN</option>
-                        <option value="PURPLE">PURPLE</option>
-                        <option value="YELLOW">YELLOW</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select name="size" class="form-control form-select" aria-label="Choose Width">
-                        <option selected>Choose Width</option>
-                        <option value="87">87</option>
-                        <option value="93">93</option>
-                        <option value="99">99</option>
-                        <option value="102">102</option>
-                        <option value="105">105</option>
-                        <option value="111">111</option>
-                        <option value="117">117</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="length" class="form-label">Length</label>
-                    <input class="form-control" type="number" name="length" />
-                </div>
-                <div class="form-group">
-                    <label for="weight" class="form-label">Weight</label>
-                    <input class="form-control" type="number" name="weight" />
-                </div>
-                <hr />
-                <input class="form-control btn btn-primary" type="submit" value="submit" />
-            </form>
-        </div>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-outline-primary">This Week</button>
+    <button type="button" class="btn btn-danger">This Month</button>
+    <button type="button" class="btn btn-warning">All</button>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h1 class="primary">{{headerData}}</h1>
+    </div>
+    <div class="card-body">
 
+        <table class="table table-striped">
+            <!-- create the table header -->
+            <thead>
+                <tr>
+                    <th>Roll ID</th>
+                    <th>Location</th>
+                    <th>Color</th>
+                    <th>Width</th>
+                    <th>Length</th>
+                    <th>Weight</th>
+                    <th>Created By</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <!-- create the table body -->
+            <tbody>
+                {% for row in data%}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[11]}}, {{row[12]}}</td>
+                    <td>{{row[9]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-<form>
-
-</form>
 {% endblock %}

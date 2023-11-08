@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% set active_page='extruder' %}
+{% block pageTitle %}
+Extruder
+{%endblock%}
+{% block pageContent %}
+<h1 class="primary">I am extruder page</h1>
+<div class="row">
+    <div class="col-lg-4 offset-lg-2 my-2">
+        <div class="card effect1">
+            <form method="POST" action="{{url_for('extruder.test')}}">
+                {{form.hidden_tag()}}
+                {{form.csrf_token}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Extruder Roll</legend>
+                    <div class="form-group">
+                        {{form.locationID.label}}
+                        {{form.locationID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.colorID.label}}
+                        {{form.colorID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.widthID.label}}
+                        {{form.widthID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.length.label}}
+                        {% if form.length.errors %}
+                        {{form.username(class="form-control is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.length.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{form.length(class="form-control")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{form.weight.label(class="form-control-label")}}
+                        {{form.weight(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.comment.label}}
+                        {{form.comment(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.users.label}}
+                        {{form.users(class="form-control")}}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-primary form-control")}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

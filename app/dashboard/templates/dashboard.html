@@ -4,6 +4,51 @@
 Dashboard
 {%endblock%}
 {% block pageContent %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">
+                    Green Extruder Length
+                </h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li class="ms-auto">
+                        <span class="counter text-success">200</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">
+                    Black Extruder Length
+                </h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div class="sparklinedash2">
+                            <canvas style="display: inline-block; width: 67px; height: 30px; vertical-align: top;" width="67"
+                             height="30"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto">
+                        <span class="counter text-success">1000</span>
+                    </li>
+                </ul>
+            </div>
+        </div>  <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">
+                    Yellow Extruder Length
+                </h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li class="ms-auto">
+                        <span class="counter text-success">15000</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="container">
         {% with data=extruderDF  %}
          {% include "inventoryData.html" %}
