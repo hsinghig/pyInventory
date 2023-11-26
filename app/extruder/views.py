@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, redirect, g
 from app import app
-from app.extruder.extruderForm import ExtruderForm
+from app.extruder.extruderForm import ExtruderForm, ExtruderFilterForm
 from app.utility.query_helper import get_colors, get_extruder_data, get_locations, get_users, get_widths, insert_extruder
 from app.utility.db_helper import get_db
 from app.utility.flash_utility import flash_message
@@ -20,6 +20,36 @@ def home():
 
    # pdb.set_trace()
     return render_template('extruder.html', data = data)
+
+@extruder_blueprint.route("/filter/<criteria>", methods=['GET', 'POST'])
+def filterCriteria12(criteria):
+    pass
+    
+
+def get_data(numberOfDays):
+    if numberOfDays is None:
+        print('all the results')
+    
+    dt = datetime.date.today()
+    if (numberOfDays == 7):        
+        newDate = dt + dt.timedelta(days = -7)
+
+    if (numberOfDays == 31):
+        newDate = dt + dt.timedelta(days = -31)
+        
+@extruder_blueprint.route("/filter", methods=['GET', 'POST'])
+def filterCriteria():
+    colorExtruder, colorCrossPly = get_colors()
+    widths = get_widths()
+    form = ExtruderFilterForm()
+    form.colorFilterForm.choices = colorExtruder
+    form.widthFilterForm.choices = widths
+    if request.method == "POST":
+        colorList = request.form.getlist('colorFilterForm')
+        widthList = request.form.getlist('widthList')
+        return render_template('home.html')
+    return render_template('extruderFilter.html', form= form)
+
 
 @extruder_blueprint.route("/test", methods=['GET', 'POST'])
 def test():

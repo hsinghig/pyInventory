@@ -1,0 +1,10 @@
+{% from 'macroTable.html' import display_table %}
+{% extends 'base.html' %}
+{% set active_page='index' %}
+{% block pageTitle %}
+Table
+{%endblock%}
+{% block pageContent %}
+<h1 class="primary">I am Table Page</h1>
+    {{display_table(heading, data)}}
+{% endblock %}

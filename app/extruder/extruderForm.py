@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, SelectField
+from wtforms import StringField, TextAreaField, SubmitField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class ExtruderForm(FlaskForm):
@@ -14,3 +14,8 @@ class ExtruderForm(FlaskForm):
 
     def __repr__(self) -> str:
         return '<ExtruderForm {}>'.format(self.locationID)
+    
+class ExtruderFilterForm(FlaskForm):
+    colorFilterForm = SelectMultipleField("Color")
+    widthFilterForm = SelectMultipleField("Width")
+    submit = SubmitField("Submit")

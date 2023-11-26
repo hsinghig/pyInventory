@@ -1,7 +1,31 @@
 import pandas as pd
 import os
 import json
+from pytz import datetime
+import pytz
+from datetime import datetime, date, timedelta
+from zoneinfo import ZoneInfo
 
+# tzdata
+
+def get_convert_datetime(datePassed, orig_timezone, convert_timezone):
+    dt = datetime.strptime(datePassed, '%Y-%m-%d %H:%M:%S')
+    if orig_timezone == 'EST':
+        dt = dt.astimezone(pytz.timezone('US/Eastern'))
+        dt = dt.astimezone(pytz.UTC)
+    
+    if convert_timezone == 'EST':
+        dt = (dt.replace(tzinfo=ZoneInfo('UTC')).astimezone(ZoneInfo('America/New_York')))
+    
+    if convert_timezone == 'UTC':
+        dt = dt.astimezone(pytz.UTC)
+
+    return dt
+
+def get_date(numberOfDays: int):
+    newDate = date.today()
+    newDate =  newDate + timedelta(days = -1 * numberOfDays)   
+    return newDate
 
 def loadInventoryData():
     inventoryFilePath = 'app//data//inventoryData.xlsx'
@@ -65,5 +89,17 @@ def test():
 
 if __name__ == '__main__':
     test()
+    print(get_date(7))
+    print(get_date(31))
    # loadInventoryData()
-    getInventory()
+    #getInventory()
+    date_format = '%Y-%m-%d %H:%M:%S'
+    dateListEST = [ '2023-07-01 10:35:02', '2023-09-01 13:35:02', '2023-10-01 21:35:02', '2023-08-01 07:35:02', '2023-11-07 10:35:02']
+    print('--------------')
+    for item in dateListEST:
+        utcDate = get_convert_datetime(item, 'EST', 'UTC')
+        convertBackString = utcDate.strftime(date_format)
+        estNewDate = get_convert_datetime(convertBackString, 'UTC', 'EST')
+        estNewDateString = estNewDate.strftime(date_format)
+        convertBack = get_convert_datetime(estNewDateString, 'EST', 'UTC')
+        print(f' EST : {item}, UTC : {convertBackString}, EST (Back) : {estNewDateString}, UTC again: {convertBack.strftime(date_format)}')

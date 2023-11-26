@@ -32,7 +32,7 @@ c.execute(""" CREATE TABLE widths(
 )""")
 
 widthList = [
-    (87, 1), (93,1), (99, 1), (99, 1), (102, 1), (105, 1), (111, 1), (117,1)
+    (87, 1), (93,1), (99, 1), (102, 1), (105, 1), (111, 1), (117,1)
 ]
 c.executemany("INSERT INTO widths(width, isActive) VALUES (?,?)", widthList)
 

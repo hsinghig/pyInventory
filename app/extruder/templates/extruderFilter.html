@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% set active_page='extruder' %}
+{% block pageTitle %}
+Extruder
+{%endblock%}
+{% block pageContent %}
+<div class="row">
+    <div class="col-lg-4 offset-lg-2 my-2">
+        <div class="card effect1">
+            <form method="POST" action="{{url_for('extruder.filterCriteria')}}">
+                {{form.hidden_tag()}}
+                {{form.csrf_token}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Filter Form</legend>
+                    <div class="form-group">
+                        {{form.colorFilterForm.label}}
+                        {{form.colorFilterForm(class="form-control")}}
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        {{form.widthFilterForm.label}}
+                        {{form.widthFilterForm(class="form-control")}}
+                    </div>
+                    <br />
+                    <hr>
+                    <br />
+                    <div class="summary">
+                        <h4>Filter Criteria Chosen :</h4>
+                        <p><strong>Color : </strong> <label id="labelFilterColor" class="form-check-label"></label></p>
+                        <p><strong>Width : </strong><label id="labelFilterWidth" class="form-check-label"></label></p>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-primary form-control")}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

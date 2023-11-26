@@ -49,13 +49,19 @@ Dashboard
         </div>
     </div>
 </div>
-    <div class="container">
+<div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-outline-primary" id="btnExportExtruderCSV">Export Result (CSV)</button>
+        </div>
         {% with data=extruderDF  %}
          {% include "inventoryData.html" %}
         {% endwith %}
     </div>
     <hr/>
     <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-outline-primary" id="btnExportCrossPlyCSV">Export Result (CSV)</button>
+        </div>
         {% with data=crossPlyDF %}
          {% include "inventoryData.html" %}
         {% endwith %}
