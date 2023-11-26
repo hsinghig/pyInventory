@@ -22,3 +22,7 @@
         {{data_rows(data)}}
     </table>
 {% endmacro %}
+
+{% macro create_site_link(link, displayText) %}
+    <a href="{{url_for(link)}}">{{displayText}}</a>
+{% endmacro %}

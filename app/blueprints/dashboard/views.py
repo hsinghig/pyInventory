@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, send_file, url_for, jsonify, redirect
-from app import app
+
 from app.dataLoader import loadInventoryData
 dashboard_blueprint = Blueprint("dashboard", __name__, template_folder="templates")
 
@@ -16,3 +16,10 @@ def processextruder():
 @dashboard_blueprint.route("/process-crossply")
 def processCrossply():
     return send_file('crossplyData.csv', as_attachment=True)
+
+@dashboard_blueprint.route('/user/<name>')
+def create_tablewidth(name):
+    width = tblwidth(name=name, isActive=True, comment='Added now')
+    db.session.add(width)
+    db.session.commit()
+    return 'created width'

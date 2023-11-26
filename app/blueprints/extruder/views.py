@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, redirect, g
-from app import app
-from app.extruder.extruderForm import ExtruderForm, ExtruderFilterForm
+from app.blueprints.extruder.extruderForm import ExtruderForm, ExtruderFilterForm
 from app.utility.query_helper import get_colors, get_extruder_data, get_locations, get_users, get_widths, insert_extruder
 from app.utility.db_helper import get_db
 from app.utility.flash_utility import flash_message

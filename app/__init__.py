@@ -1,108 +1,47 @@
-import dateutil
-from flask import Flask, send_from_directory, Blueprint, render_template, request, redirect, url_for, jsonify, g
-from flask_wtf import FlaskForm, RecaptchaField
-from flask_wtf.file import FileAllowed, FileRequired
-from wtforms import FileField, StringField, TextAreaField, SubmitField, SelectField
-from wtforms.validators import InputRequired, DataRequired, Length, ValidationError
-from werkzeug.utils import secure_filename, escape
-import pdb
-import sqlite3
-import datetime
-from flask_sqlalchemy import SQLAlchemy
-from secrets import token_hex
-import pandas as pd
-import os
-from app.utility.csvFileWriter import updater, writer
-import config
+from flask import Flask, render_template
+from app.blueprints.dashboard.views import dashboard_blueprint
+from app.blueprints.home.views import home_blueprint
+from app.blueprints.extruder.views import extruder_blueprint
 from app.dataLoader import get_table_DUMMY_DATA
+from .extensions import db
+from .constants import get_formatted_conn
+from sqlalchemy.ext.automap import automap_base
+import dateutil, datetime
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+def create_app():
+    app = Flask(__name__)
+    conn = get_formatted_conn() # 'mssql+pyodbc://'+username+':' + pwd + '@'+ server + '/' + database + '?driver=ODBC+Driver+17+for+SQL+Server'
+    print(conn)
+    app.config['SECRET_KEY'] = 'SECRET_KEY'
+    app.config['SQLALCHEMY_DATABASE_URI'] = conn
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
 
-server = 'dbpyinventory.database.windows.net'
-database = 'pyInventoryDB'
-username = 'sqladmin'
-pwd = 'Harsha77!'
+    @app.errorhandler(404)  
+    def page_not_found(e):
+        return render_template("404.html"), 404
+    
+    @app.template_filter('strftime')
+    def _jinja2_filter_datetime(strDate, fmt=None):
+        date = dateutil.parser.parse(strDate)
+        native = date.replace(tzinfo=None)
+        format='%b %d, %Y %H:%M:%S'
+        format2 = '%Y-%m-%d %H:%M:%S'
+        return native.strftime(format) 
 
-#connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server='+server+';Database='+database+';Uid='+username+';Pwd='+pwd+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-  
+    @app.route("/table")
+    def displayTable():       
+        heading, data = get_table_DUMMY_DATA()
+        return render_template('table.html', heading=heading, data=data)
+    
+    @app.route("/")
+    def home():
+        return render_template('home.html')
+    
+    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+    app.register_blueprint(home_blueprint, url_prefix='/home' )
+    app.register_blueprint(extruder_blueprint, url_prefix='/extruder')
+   
+    return app
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "IMPACT_GUARD"
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mssql+pyodbc://'+username+':' + pwd + '@'+ server + '/' + database + '?driver=ODBC+Driver+17+for+SQL+Server'
-#app.config["SQLALCHEMY_DATABASE_URI"] = "mssql+pyodbc://NEW-OFFICE\\user:password@localhost/testdb?driver=ODBC+Driver+17+for+SQL+Server"
-db = SQLAlchemy(app)
-print(app)
-print(app.config)
 
-widths = db.Table('tblwidth', db.metadata, schema="ip", autoload=True, autoload_with=db.engine)
-
-@app.template_filter('strftime')
-def _jinja2_filter_datetime(strDate, fmt=None):
-    date = dateutil.parser.parse(strDate)
-    native = date.replace(tzinfo=None)
-    format='%b %d, %Y %H:%M:%S'
-    format2 = '%Y-%m-%d %H:%M:%S'
-    return native.strftime(format) 
-
-# app.config['SECRET_KEY']='IMPACTGUARD'
-# app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["jpeg", "jpg", "png"]
-# app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
-# app.config["IMAGE_UPLOADS"] = os.path.join(basedir, "uploads")
-# app.config["RECAPTCHA_PUBLIC_KEY"] = "6Lfty"
-# app.config["RECAPTCHA_PRIVATE_KEY"]="6LFSDFFDY"
-# for key in app.config:
-#     print(key, app.config[key])
-# print(app.config)
-# print(os.environ)
-
-@app.route("/table")
-def displayTable():
-    results = db.session.query(widths).all()
-    for r in results:
-        print(r.name)
-    heading, data = get_table_DUMMY_DATA()
-    return render_template('table.html', heading=heading, data=data)
-
-@app.route("/chart")
-def get_chart():
-    return render_template('chart.html')
-
-@app.route("/")
-@app.route("/home")
-def home():
-    filename = 'app//data//test.csv'
-    header = ('Rank', 'Rating', 'Title')
-    data = [
-        (1, 8, 'The Matrix'), (1, 7, 'The Matrix Reloaded'), (1, 5, 'The Matrix Revolutions'), (1, 6, 'The Matrix Resurrections')
-    ]
-    writer(header, data, filename, "write")
-    updater(filename=filename)
-    return render_template('index.html')
-
-@app.route("/index")
-def index():   
- 
-    return render_template("index.html")
-
-@app.route("/api/data")
-def getExtruderData():
-
-    filepath = 'app//data//extruderData.json'    
-    df = pd.read_json(filepath)
-    json_data = df.to_json(orient='records')
-    return json_data
-
-from app.crossply.views import crossply_blueprint
-app.register_blueprint(crossply_blueprint, url_prefix='/crossply')
-
-from app.dashboard.views import dashboard_blueprint
-app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
-
-from app.extruder.views import extruder_blueprint
-app.register_blueprint(extruder_blueprint, url_prefix='/extruder')
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, "_database", None)
-    if db is not None:
-        db.close()

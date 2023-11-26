@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% from 'macroTable.html' import create_site_link %}
 {% set active_page='extruder' %}
 {% block pageTitle %}
 Extruder
 {%endblock%}
 {% block pageContent %}
+{{create_site_link('extruder.home', 'Extruder Home')}}
 <h1 class="primary">I am extruder page</h1>
 <div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-outline-primary">This Week</button>
