@@ -16,6 +16,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = conn
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
+    print(conn)
 
     @app.errorhandler(404)  
     def page_not_found(e):
