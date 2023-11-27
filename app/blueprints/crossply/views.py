@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, redirect
 
-from app import app
 
 crossply_blueprint = Blueprint("crossply", __name__, template_folder="templates")
 
