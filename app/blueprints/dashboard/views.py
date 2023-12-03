@@ -1,6 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, send_file, url_for, jsonify, redirect
 
 from app.dataLoader import loadInventoryData
+from app.models import tblwidth
+
+from app.extensions import db
+from sqlalchemy import text
+
 dashboard_blueprint = Blueprint("dashboard", __name__, template_folder="templates")
 
 @dashboard_blueprint.route("/")
@@ -23,3 +28,12 @@ def create_tablewidth(name):
     db.session.add(width)
     db.session.commit()
     return 'created width'
+
+@dashboard_blueprint.route('/color/<name>')
+def select_tblcolor(name):
+    stmt = text('select id, name, isactive from [ip].[tblextruderlocation]')
+    with db.engine.connect() as conn:
+        result = conn.execute(stmt)
+    #result = db.engine.execute(stmt)
+    print(result)
+    return 'result came from tblcolor'

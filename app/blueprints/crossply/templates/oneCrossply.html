@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% set active_page='xply' %}
+{% block pageTitle %}
+<h2>Add Cross Ply Details</h2>
+{%endblock%}
+{% block pageContent %}
+<h1 class="primary">I am add Cross Ply page</h1>
+<div class="container">
+    <div class="card">
+        <div class="row m-2">
+            <h2 class="text-center display-3 m-2">Add New Crossply</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col g-5">
+                <h2 class="text-center display-6 m-2">Color #0</h2>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3 g-5">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>Choose Color...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3 g-5">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>Choose Width...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary">Get Roll for Color #0</button>
+                <div class="row g-4">
+                    <input class="form-control" type="text" value="You chose Roll 32"
+                        aria-label="readonly input example" readonly>
+                </div>
+            </div>
+            <div class="col g-5">
+                <h3 class="text-center display-6 g-4">Color #90</h3>
+                <div class="row y-5">
+                    <div class="col">
+                        <div class="input-group mb-3 gt-5">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>Choose Color...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3 g-5">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>Choose Width...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>            
+                <button type="button" class="btn btn-primary">Get Roll for Color #90</button>
+                <div class="row g-4">
+                    <input class="form-control" type="text" value="You chose Roll 18"
+                        aria-label="readonly input example" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+            <h2 class="text-center y-5">Crossply Details</h2>
+            <div class="col">
+                <div class="input-group mb-3 g-5">
+                    <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Choose Crossply Color...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3 g-5">
+                    <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Choose Crossply Width...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+          
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Crossply Length</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3 g-5">
+                    <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Submitted By...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

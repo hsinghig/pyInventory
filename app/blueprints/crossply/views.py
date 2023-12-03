@@ -10,3 +10,7 @@ def home():
 @crossply_blueprint.route("/add")
 def addcrossply():
     return render_template('addCrossply.html')
+
+@crossply_blueprint.route("/addone")
+def addonecrossply():
+    return render_template('oneCrossply.html')

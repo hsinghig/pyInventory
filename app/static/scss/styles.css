@@ -183,6 +183,19 @@ textarea {
   height: 100px;
 }
 
+.currentActingElement {
+  background-color: "#CAD2C5";
+  border: solid 1px black;
+}
+
+.crossplyColor0 {
+  background-color: "#CAD2C5";
+}
+
+.crossplyColor90 {
+  background: "#354F52";
+}
+
 @media only screen and (min-width: 35rem) {
   .headlineColor {
     background-color: red;
