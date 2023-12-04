@@ -8,6 +8,7 @@ from app.extensions import db, init_extensions
 from .constants import get_formatted_conn
 from sqlalchemy.ext.automap import automap_base
 import dateutil, datetime
+from flask_caching import Cache
 
 def create_app():
     app = Flask(__name__)
@@ -16,8 +17,11 @@ def create_app():
     app.config['SECRET_KEY'] = 'SECRET_KEY'
     app.config['SQLALCHEMY_DATABASE_URI'] = conn
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config["CACHE_TYPE"] = "SimpleCache",  # Flask-Caching related configs
+    app.config["CACHE_DEFAULT_TIMEOUT"] = 300
 
     init_extensions(app)
+    #cache = Cache(app)
     print(conn)
 
     with app.app_context():        
