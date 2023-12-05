@@ -15,9 +15,10 @@
               Extruder
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item {{'active' if active_page=='extruder' else ''}}" href="{{url_for('extruder.home')}}">Home</a></li>
-              <li><a class="dropdown-item" href="#">Add New Extruder</a></li>
-              <li><a class="dropdown-item" href="#">Extruder Reports</a></li>
+              <li><a class="dropdown-item {{'active' if active_page=='extruder' else ''}}" href="{{url_for('extruder.new')}}">Home</a></li>
+              <li><a class="dropdown-item {{'active' if active_page=='extruder' else ''}}" href="{{url_for('extruder.new')}}">New</a></li>
+              <li><a class="dropdown-item" href="{{url_for('extruder.addExtruder')}}">Add New Extruder</a></li>
+              <li><a class="dropdown-item" href="{{url_for('extruder.test')}}">Extruder Reports</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">

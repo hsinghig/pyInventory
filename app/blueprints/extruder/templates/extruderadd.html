@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% from 'macroTable.html' import create_site_link, every_page_header %}
+{% set active_page='extruder' %}
+{% block pageTitle %}
+Add/Update Extruder 
+{%endblock%}
+{% block pageContent %}
+<div class="container-fluid px-2">
+    {{every_page_header('Add/Update Extruder Page')}}
+    <a href="/extruder">Back to Extruder Home Page</a>
+
+    <div class="card my-4">
+        <div class="card-body px-0 pb-2">           
+            <form method="POST" action="{{url_for('extruder.addExtruder')}}">
+                {{form.hidden_tag()}}
+                {{form.csrf_token}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Extruder Roll</legend>
+                    <div class="form-group">
+                        {{form.locationID.label}}
+                        {{form.locationID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.colorID.label}}
+                        {{form.colorID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.widthID.label}}
+                        {{form.widthID(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.length.label}}
+                        {% if form.length.errors %}
+                        {{form.username(class="form-control is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.length.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{form.length(class="form-control")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{form.weight.label(class="form-control-label")}}
+                        {{form.weight(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.comment.label}}
+                        {{form.comment(class="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.users.label}}
+                        {{form.users(class="form-control")}}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-primary form-control")}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

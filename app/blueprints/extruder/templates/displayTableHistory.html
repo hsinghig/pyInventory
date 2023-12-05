@@ -1,0 +1,22 @@
+<div class="table-responsive">
+    <table class="table table-striped align-items-center mb-0">
+        <!-- create the table header -->
+        <thead>
+            <tr>
+                {% for col in data.columns %}
+                <th class="align-middle text-center">{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <!-- create the table body  -->
+        <tbody>
+            {% for row in data.itertuples() %}
+            <tr>
+                {% for cell in row[1:] %}
+                <td class="align-middle text-center">{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

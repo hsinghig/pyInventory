@@ -13,7 +13,7 @@ class tblcolor(db.Model):
     __table_args__ = {"schema":"ip"}
     id= db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    isExtruder = db.Column(db.Boolean())
+    isExtuder = db.Column(db.Boolean())
     isCrossPly = db.Column(db.Boolean())
     isActive = db.Column(db.Boolean())
     comment = db.Column(db.String())
@@ -35,6 +35,20 @@ class tblextruderlocation(db.Model):
 class tblextruder(db.Model):
     __table_args__ = {"schema":"ip"}
     id= db.Column(db.Integer, primary_key=True)
+    location_id = db.Column(db.Integer)
+    color_id = db.Column(db.Integer)
+    width_id = db.Column(db.Integer)
+    length = db.Column(db.Integer)
+    CreatedDate = db.Column(db.String)
+    ModifiedDate = db.Column(db.String)
+    CreatedBy_id = db.Column(db.Integer)
+    ModifiedBy_id = db.Column(db.Integer)
+    weight = db.Column(db.Float)
+
+class tblextruderHist(db.Model):
+    __table_args__ = {"schema":"ip"}
+    id= db.Column(db.Integer, primary_key=True)
+    extruder_id = db.Column(db.Integer)
     location_id = db.Column(db.Integer)
     color_id = db.Column(db.Integer)
     width_id = db.Column(db.Integer)

@@ -1,0 +1,44 @@
+<div class="table-responsive">
+    <table class="table table-striped align-items-center mb-0">
+        <!-- create the table header -->
+        <thead>
+            <tr>
+                {% for col in data.columns %}
+                <th class="align-middle text-center">{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <!-- create the table body  -->
+        <tbody>
+            {% for row in data.itertuples() %}
+            <tr>
+                <td class="align-middle text-center">
+                    <a href="/extruder/exthist/{{row[1]}}" class="align-middle text-center">{{row[1]}}
+                    </a>
+                </td>
+                <td class="align-middle text-center">
+                    {{row[2]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[3]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[4]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[5]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[6]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[7]}}
+                </td>
+                <td class="align-middle text-center">
+                    {{row[8]}}
+                </td>   
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% from 'macroTable.html' import create_site_link, every_page_header %}
+{% set active_page='extruder' %}
+{% block pageTitle %}
+Extruder New
+{%endblock%}
+{% block pageContent %}
+<div class="container-fluid px-2">
+    {{every_page_header('Extruder History Page')}}
+    <a href="/extruder">Back to Extruder Home Page</a>
+
+    <div class="card my-4">
+        <div class="card-body px-0 pb-2">
+            <h6 class="text-capitalize display-6 ps-3">Current Extruder Roll Detail</h6>
+            {% with data=extruderData %}
+            {% include "displayTableExtruder.html" %}
+            {% endwith %}
+            <br />
+            <hr />
+            <br />
+            <h6 class="text-capitalize display-6 ps-3">Extruder Roll History Table</h6>
+            <br />
+            {% with data=extruderHist %}
+            {% include "displayTableHistory.html" %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endblock %}

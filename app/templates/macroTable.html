@@ -26,3 +26,9 @@
 {% macro create_site_link(link, displayText) %}
     <a href="{{url_for(link)}}">{{displayText}}</a>
 {% endmacro %}
+
+{% macro every_page_header(headerText) %}
+<div style="border-radius:4px; height: 3em; background-image: linear-gradient(195deg, #CAD2C5, #84A98C)">
+    <span class="px-2 display-6 mask opacity-6">{{headerText}}</span>
+</div>
+{%endmacro %}

@@ -28,3 +28,4 @@ py -m venv env
 4. loguru - logging 
 5. Xarray - multi dimensional data
 
+https://stackoverflow.com/questions/19314342/python-sqlalchemy-pass-parameters-in-connection-execute
